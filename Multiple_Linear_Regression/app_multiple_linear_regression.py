@@ -19,9 +19,15 @@ st.set_page_config(
 # =========================
 # Load CSS
 # =========================
-def load_css(file):
-    with open(file) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+def load_css(filename):
+    base_dir = os.path.dirname(__file__)
+    css_path = os.path.join(base_dir, filename)
+
+    if os.path.exists(css_path):
+        with open(css_path) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    else:
+        st.warning("styles.css not found. Using default style.")
 
 load_css("styles.css")
 
@@ -40,7 +46,9 @@ st.markdown("""
 # =========================
 @st.cache_data
 def load_data():
-    return sns.load_dataset("tips")
+    base_dir = os.path.dirname(__file__)
+    csv_path = os.path.join(base_dir, "tips.csv")
+    return pd.read_csv(csv_path)
 
 df = load_data()
 
@@ -172,3 +180,4 @@ predicted_tip = model.predict(input_scaled)[0]
 st.success(f"Predicted Tip Amount: ${predicted_tip:.2f}")
 st.success(f"Predicted Total Amount (Bill + Tip): ${bill_amount + predicted_tip:.2f}")
 st.markdown('</div>', unsafe_allow_html=True)
+
