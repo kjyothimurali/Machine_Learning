@@ -36,8 +36,10 @@ st.markdown("""
 # load data #
 @st.cache_data
 def load_data():
-    return sns.load_dataset("tips")
-df=load_data()
+    base_dir = os.path.dirname(__file__)
+    csv_path = os.path.join(base_dir, "tips.csv")
+    return pd.read_csv(csv_path)
+
 
 # Data Preview #
 st.markdown('<div class="card"><h3><b>Data Preview</b></h2>',unsafe_allow_html=True)
@@ -103,3 +105,4 @@ bill=st.slider("Total Bill Amount (Rs.)",float(df['total_bill'].min()),float(df[
 tip=model.predict(scaler.transform([[bill]]))[0]
 st.markdown(f'<div class="prediction-box">Predicted Tip: (RS.) {tip:.2f}</div>',unsafe_allow_html=True)
 st.markdown('</div>',unsafe_allow_html=True)
+
