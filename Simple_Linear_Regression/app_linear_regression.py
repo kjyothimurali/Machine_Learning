@@ -21,11 +21,17 @@ st.markdown("""
 
             </div>
             """,unsafe_allow_html=True)
-# load data #
-@st.cache_data
-def load_data():
-    return sns.load_dataset("tips")
-df=load_data()
+import os
+
+def load_css(file):
+    if os.path.exists(file):
+        with open(file) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    else:
+        st.warning("style.css not found. Using default Streamlit style.")
+
+load_css("style.css")
+
 
 # Data Preview #
 st.markdown('<div class="card"><h3><b>Data Preview</b></h2>',unsafe_allow_html=True)
@@ -90,4 +96,5 @@ st.markdown('<div class = "card"><h3><b>Predict tip Amount</b></h3>',unsafe_allo
 bill=st.slider("Total Bill Amount (Rs.)",float(df['total_bill'].min()),float(df['total_bill'].max()),30.0)
 tip=model.predict(scaler.transform([[bill]]))[0]
 st.markdown(f'<div class="prediction-box">Predicted Tip: (RS.) {tip:.2f}</div>',unsafe_allow_html=True)
+
 st.markdown('</div>',unsafe_allow_html=True)
