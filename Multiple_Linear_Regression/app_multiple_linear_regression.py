@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import numpy as np
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
@@ -180,4 +181,5 @@ predicted_tip = model.predict(input_scaled)[0]
 st.success(f"Predicted Tip Amount: ${predicted_tip:.2f}")
 st.success(f"Predicted Total Amount (Bill + Tip): ${bill_amount + predicted_tip:.2f}")
 st.markdown('</div>', unsafe_allow_html=True)
+
 
