@@ -1,6 +1,7 @@
 import streamlit as st
 import seaborn as sns
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -34,11 +35,12 @@ st.markdown("""
             </div>
             """,unsafe_allow_html=True)
 # load data #
-@st.cache_data
 def load_data():
     base_dir = os.path.dirname(__file__)
     csv_path = os.path.join(base_dir, "tips.csv")
     return pd.read_csv(csv_path)
+
+df = load_data()
 
 
 # Data Preview #
@@ -105,4 +107,5 @@ bill=st.slider("Total Bill Amount (Rs.)",float(df['total_bill'].min()),float(df[
 tip=model.predict(scaler.transform([[bill]]))[0]
 st.markdown(f'<div class="prediction-box">Predicted Tip: (RS.) {tip:.2f}</div>',unsafe_allow_html=True)
 st.markdown('</div>',unsafe_allow_html=True)
+
 
