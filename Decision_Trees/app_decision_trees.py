@@ -17,12 +17,15 @@ st.title("🚢 Titanic Survival Prediction using Decision Tree")
 # -------------------------------
 # Load Data
 # -------------------------------
+import os
+
 @st.cache_data
 def load_data():
-    df = pd.read_csv("titanic.csv")
-    return df
+    base_dir = os.path.dirname(__file__)   # folder of app_decision_trees.py
+    csv_path = os.path.join(base_dir, "titanic.csv")
+    return pd.read_csv(csv_path)
 
-df = load_data()
+df = load_data()  
 
 st.subheader("📊 Dataset Preview")
 st.dataframe(df.head())
@@ -135,3 +138,4 @@ if st.button("🔮 Predict Survival"):
 # -------------------------------
 st.markdown("---")
 st.markdown("💡 **Model:** Decision Tree Classifier | **Dataset:** Titanic")
+
