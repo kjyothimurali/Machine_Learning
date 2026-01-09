@@ -1,7 +1,6 @@
 import streamlit as st
 import seaborn as sns
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -10,8 +9,12 @@ from sklearn.metrics import mean_absolute_error,mean_squared_error, r2_score
 #page config #
 st.set_page_config("Linear Regression App ",layout="centered")
 # Load css #
+import os
+
+
+# Load css (Cloud-safe)
 def load_css(filename):
-    base_dir = os.path.dirname(__file__)   # folder of app_linear_regression.py
+    base_dir = os.path.dirname(__file__)   # directory of this .py file
     css_path = os.path.join(base_dir, filename)
 
     if os.path.exists(css_path):
@@ -21,6 +24,7 @@ def load_css(filename):
         st.warning("style.css not found. Using default Streamlit style.")
 
 load_css("style.css")
+
 # Title and description #
 st.markdown("""
             <div class="card">
