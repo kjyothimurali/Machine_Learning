@@ -26,7 +26,11 @@ st.write("Predict whether a user will purchase a product based on age and salary
 # -------------------------------
 @st.cache_data
 def load_data():
-    return pd.read_csv("Social_Network_Ads.csv")
+    file_path = os.path.join(
+        os.path.dirname(__file__),
+        "Social_Network_Ads.csv"
+    )
+    return pd.read_csv(file_path)
 
 df = load_data()
 
@@ -153,3 +157,4 @@ st.markdown(
     "💡 **Model:** Random Forest Classifier | **Dataset:** Social Network Ads",
     unsafe_allow_html=True
 )
+
