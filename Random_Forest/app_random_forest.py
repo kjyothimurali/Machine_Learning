@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -157,4 +158,5 @@ st.markdown(
     "💡 **Model:** Random Forest Classifier | **Dataset:** Social Network Ads",
     unsafe_allow_html=True
 )
+
 
