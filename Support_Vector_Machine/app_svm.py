@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import os
 
 from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
@@ -31,9 +32,11 @@ st.write(
 # ------------------------------------------------
 # Load Dataset
 # ------------------------------------------------
+
 @st.cache_data
 def load_data():
-    return pd.read_csv("train_u6lujuX_CVtuZ9i.csv")
+    file_path = os.path.join(os.path.dirname(__file__), "train_u6lujuX_CVtuZ9i.csv")
+    return pd.read_csv(file_path)
 
 df = load_data()
 
@@ -152,4 +155,5 @@ if st.button("🔍 Check Loan Eligibility"):
 # ------------------------------------------------
 st.markdown("---")
 st.caption("Model: Support Vector Machine (SVM)")
+
 
