@@ -18,16 +18,23 @@ st.set_page_config(
 # -------------------------------
 # Load Models & Feature Names
 # -------------------------------
+import os
+import joblib
+import streamlit as st
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 @st.cache_resource
 def load_models():
-    lr = joblib.load("lr_model.pkl")
-    dt = joblib.load("dt_model.pkl")
-    rf = joblib.load("rf_model.pkl")
-    stack = joblib.load("stacking_model.pkl")
-    features = joblib.load("feature_names.pkl")
+    lr = joblib.load(os.path.join(BASE_DIR, "lr_model.pkl"))
+    dt = joblib.load(os.path.join(BASE_DIR, "dt_model.pkl"))
+    rf = joblib.load(os.path.join(BASE_DIR, "rf_model.pkl"))
+    stack = joblib.load(os.path.join(BASE_DIR, "stacking_model.pkl"))
+    features = joblib.load(os.path.join(BASE_DIR, "feature_names.pkl"))
     return lr, dt, rf, stack, features
 
 lr_model, dt_model, rf_model, stacking_model, feature_names = load_models()
+
 
 # -------------------------------
 # Title & Description
@@ -148,3 +155,4 @@ if st.button("🔘 Check Loan Eligibility (Stacking Model)"):
         from multiple models, the risk of repayment is high.
         Therefore, the system **rejects the loan**.
         """)
+
